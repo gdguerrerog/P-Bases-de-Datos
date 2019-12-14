@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Proyecto_Bases_de_Datos
+namespace Proyecto_Bases_de_Datos.logic
 {
     class Program
     {
