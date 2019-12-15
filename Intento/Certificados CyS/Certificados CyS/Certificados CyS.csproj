@@ -72,9 +72,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\Classes.cs" />
     <Compile Include="DataAccess\ConnectionMySql.cs" />
     <Compile Include="DataAccess\IConnection.cs" />
-    <Compile Include="DataAccess\Item.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

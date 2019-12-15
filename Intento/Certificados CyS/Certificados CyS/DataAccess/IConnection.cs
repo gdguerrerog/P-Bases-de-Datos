@@ -13,5 +13,10 @@ namespace Certificados_CyS.DataAccess
         Exception Close();
         bool IsOpen();
         Item[] GetItems();
+        Cliente[] GetClientes();
+        Administrativo[] GetGerentes();
+        Administrativo[] GetLaboratoristas();
+        Administrativo[] GetAsesores();
+
     }
 }

@@ -15,6 +15,10 @@ namespace Certificados_CyS.DataAccess
         const string DATABASE = "proyectocs";
 
         const string ITEM_TABLE = "item";
+        const string GERENTES_TABLE = "gerente";
+        const string CLIENTES_TABLE = "cliente";
+        const string LABORATORISTA_TABLE = "laboratorista";
+        const string ASESOR_TABLE = "asesor";
 
 
         private MySqlConnection connection;
@@ -67,11 +71,57 @@ namespace Certificados_CyS.DataAccess
                 tmp.alcanceMin = reader.GetString(7);
                 tmp.resolucion = reader.GetDouble(8);
 
-                Console.WriteLine(tmp.marca);
-
                 items.Add(tmp);
             }
+            reader.Close();
             return items.ToArray();
         }
+
+        public Cliente[] GetClientes() {
+            MySqlCommand command = new MySqlCommand(CLIENTES_TABLE, connection);
+            command.CommandType = System.Data.CommandType.TableDirect;
+            MySqlDataReader reader = command.ExecuteReader();
+            List<Cliente> clients = new List<Cliente>();
+            Cliente tmp;
+            while (reader.Read()) {
+                tmp = new Cliente();
+                tmp.NIT = reader.GetString(0);
+                tmp.empresa = reader.GetString(1);
+                tmp.contacto = reader.GetString(2);
+                tmp.cargo = reader.GetString(3);
+                tmp.telefono = reader.GetInt64(4);
+                tmp.fax = reader.GetInt64(5);
+                tmp.mail = reader.GetString(6);
+                tmp.ciudad = reader.GetString(7);
+                tmp.direccion = reader.GetString(8);
+                tmp.password = reader.GetString(9);
+
+                clients.Add(tmp);
+            }
+            reader.Close();
+            return clients.ToArray();
+        }
+
+        private Administrativo[] GetAdministrativos(String tableName) {
+            MySqlCommand command = new MySqlCommand(tableName, connection);
+            command.CommandType = System.Data.CommandType.TableDirect;
+            MySqlDataReader reader = command.ExecuteReader();
+            List<Administrativo> administativos = new List<Administrativo>();
+            Administrativo tmp;
+            while (reader.Read()) {
+                tmp = new Administrativo();
+                tmp.id = reader.GetInt64(0);
+                tmp.nombre = reader.GetString(1);
+                tmp.password = reader.GetString(2);
+
+                administativos.Add(tmp);
+            }
+            reader.Close();
+            return administativos.ToArray();
+        }
+
+        public Administrativo[] GetGerentes() { return GetAdministrativos(GERENTES_TABLE); }
+        public Administrativo[] GetLaboratoristas() { return GetAdministrativos(LABORATORISTA_TABLE); }
+        public Administrativo[] GetAsesores() { return GetAdministrativos(ASESOR_TABLE); }
     }
 }
