@@ -1,13 +1,16 @@
-﻿using Proyecto_Bases_de_Datos.DataAccess;
+﻿using Certificados_CyS.DataAccess;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace Proyecto_Bases_de_Datos.Logic
+namespace Certificados_CyS.Logic
 {
-    class DatabaseLogic {
+    class DataBaseLogic
+    {
         private readonly IConnection connection;
-        public DatabaseLogic(IConnection connection) {
+        public DataBaseLogic(IConnection connection) {
             this.connection = connection;
         }
 
@@ -16,5 +19,14 @@ namespace Proyecto_Bases_de_Datos.Logic
             if (ex != null) Console.WriteLine("Error Connectiong to Database: " + ex.Message);
             else Console.WriteLine("Success Connetion");
         }
-    }    
+
+        public Item[] GetItems(){
+            try { 
+                return connection.GetItems();
+            } catch(Exception ex) {
+                Console.WriteLine(ex);
+                return new Item[] { };
+            }
+        }
+    }
 }

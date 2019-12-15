@@ -61,6 +61,7 @@ Cli_fax	INT	NULL,
 Cli_mail	VARCHAR(100),
 Cli_ciu	VARCHAR(25)	NOT NULL,
 Cli_dir	VARCHAR(100)	NOT NULL,
+Cli_pwd VARCHAR(25) NOT NULL,
 PRIMARY KEY(Cli_nit)
 ) ENGINE=InnoDB;
 
@@ -337,14 +338,6 @@ INSERT INTO item_cliente VALUES('TDA-1','0101','TBM30040C3','Equipo de laborator
 INSERT INTO item_cliente VALUES ('7-3-80021','1030586792','260188','Medir temperatura de las comidas','0°C < T < 180°C');
 INSERT INTO item_cliente VALUES ('TS-1','1030586792','910-9','Medir temperatura de la nevera','-50°C < T < 70°C');
 INSERT INTO item_cliente VALUES ('BOE311-TD','1030586792','BOE311','Tratamiento de alimentos','-50°C < T < 300°C');
-
-
-INSERT INTO cliente VALUES('800.194.600-3','AGROSAVIA','Luisa Gómez','Auxiliar de venta','2462544','2462544','AGROSAVIA@gmail.com','Bogotá','Km 14 vía Mosquera - Bogotá');
-INSERT INTO cliente VALUES('0101','Creaciones y suministros','Alejandra Lozano', 'Directora comercial',' 9017160',' 9017160','creacionesysuministrossas@gmail.com','Bogotá','Carrera 67 No. 10-10');
-INSERT INTO cliente VALUES('800194600-3','AGROSAVIA',		'Luisa Gómez',		'Auxiliar de venta',	'2462544','2462544',	'AGROSAVIA@gmail.com',			'Bogotá','Km 14 vía Mosquera - Bogotá');
-INSERT INTO cliente VALUES ('900073613-2','CALIBRATION SERVICE SAS','','','2047699','2047699','calibrationservice@gmail.co', 'Bogotá','CARRERA 69 A No. 55- 16 SUR');
-INSERT INTO cliente VALUES ('1030586792','4 KARNES','Fabian Avila','','5028751','5028751','karnes@gmail.co', 'Bogotá','Carrera 70b #3-45');
-
 
 INSERT INTO orden_compra VALUES (default,'9140-BS','50°C, 75°C, 100°C, 150°C, 200°C', 'Caracterización','5', '725000','2019-06-18', 'ninguna', 'EURAMENT-13');
 INSERT INTO orden_compra VALUES(default,'Ref-1D1310572','90 °C, 150 °C, 200 °C', 'Calibración','1', '300000','2019-09-11', 'ninguna', 'Guía Técnica de Trazabilidad Metrológica e Incertidumbre de Medida en Caracterización Termica de Bannos y Hornos de Temperatura Controlada');
@@ -623,60 +616,21 @@ INSERT INTO resumen_estadistico VALUES ('005','CTD','-10',NULL,NULL,NULL,NULL,NU
 
 -- CREACIÓN USUARIOS
 -- Creación de usuarios 
-DROP USER if exists 'AlejandraL'@'localhost';
-DROP USER if exists 'ClaudiaM'@'localhost';
-DROP USER if exists 'CreacioneSuministros'@'localhost';
-DROP USER if exists 'Agrosavia'@'localhost';
-DROP USER if exists 'JhonFredyM'@'localhost';
-DROP USER if exists 'gerente'@'localhost';
 
-CREATE USER 'AlejandraL'@'localhost' IDENTIFIED BY 'dcomercial111';
-CREATE USER 'ClaudiaM'@'localhost' IDENTIFIED BY 'lab112';
-CREATE USER 'Agrosavia'@'localhost' IDENTIFIED BY 'cli211';
-CREATE USER 'CreacioneSuministros'@'localhost' IDENTIFIED BY 'cli212';
-CREATE USER 'JhonFredyM'@'localhost' IDENTIFIED BY 'lab113';
-CREATE USER 'gerente'@'localhost' IDENTIFIED BY 'gerent114';
+DROP USER if exists 'app'@'localhost';
+CREATE USER 'app'@'localhost' IDENTIFIED BY 'appPassword';
+GRANT ALL PRIVILEGES ON proyectocs.* TO 'app'@'localhost';
 
--- Asignación de permisos a los usuarios
-GRANT ALL PRIVILEGES ON proyectocs.item TO 'AlejandraL'@'localhost';
-GRANT INSERT ON proyectocs.certificado TO 'ClaudiaM'@'localhost';
-GRANT INSERT ON proyectocs.cliente TO 'AlejandraL'@'localhost';
-GRANT UPDATE ON proyectocs.cliente TO 'AlejandraL'@'localhost';
-GRANT UPDATE ON proyectocs.cliente TO 'Agrosavia'@'localhost';
-GRANT UPDATE ON proyectocs.cliente TO 'CreacioneSuministros'@'localhost';
-GRANT ALL PRIVILEGES ON proyectocs.cliente TO 'gerente'@'localhost';
-GRANT ALL PRIVILEGES ON proyectocs.asesor TO 'gerente'@'localhost';
-GRANT SELECT ON proyectocs.certificado TO 'gerente'@'localhost';
-
-GRANT UPDATE ON proyectocs.certificado TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.digital TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.analogo TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.vidrio TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.bloque TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.zonaba TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.estba TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.camtem TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.termhigtem TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.temperatura TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.camhum TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.termhighum TO 'ClaudiaM'@'localhost';
-GRANT UPDATE ON proyectocs.humedad TO 'ClaudiaM'@'localhost';
-
-GRANT UPDATE ON proyectocs.certificado TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.digital TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.analogo TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.vidrio TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.bloque TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.zonaba TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.estba TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.camtem TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.termhigtem TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.temperatura TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.camhum TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.termhighum TO 'JhonFredyM'@'localhost';
-GRANT UPDATE ON proyectocs.humedad TO 'JhonFredyM'@'localhost';
-
-
+INSERT INTO cliente VALUES
+('800.194.600-3','AGROSAVIA','Luisa Gómez','Auxiliar de venta',2462544,2462544,'AGROSAVIA@gmail.com','Bogotá','Km 14 vía Mosquera - Bogotá', 'cli211'),  
+('0101','Creaciones y suministros','Alejandra Lozano', 'Directora comercial',9017160,9017160,'creacionesysuministrossas@gmail.com','Bogotá','Carrera 67 No. 10-10', 'cli212'),
+('900073613-2','CALIBRATION SERVICE SAS','','',2047699,2047699,'calibrationservice@gmail.co', 'Bogotá','CARRERA 69 A No. 55- 16 SUR', 'cli213'),
+('1030586792','4 KARNES','Fabian Avila','',5028751,5028751,'karnes@gmail.co', 'Bogotá','Carrera 70b #3-45', 'cli214'),
+-- ADMINISTRATIVOS:
+('0','','AlejandraL','Asesor',0, 0,'', '','', 'dcomercial111'),
+('0','','ClaudiaM','Laboratorista',0, 0,'', '','', 'lab112'),
+('0','','JhonFredyM','Laboratorista',0, 0,'', '','', 'lab113'),
+('0','','gerente','Gerente',0, 0,'','','', 'gerent114');
 
 /*PROCEDIMIENTOS*/ 
 DROP VIEW IF EXISTS vt2;
@@ -871,6 +825,3 @@ SELECT * FROM digital;
 SELECT * FROM temperatura;
 SELECT * FROM cliente;
 
-DROP USER if exists 'app'@'localhost';
-CREATE USER 'app'@'localhost' IDENTIFIED BY 'appPassword';
-GRANT SELECT ON proyectocs.item TO 'gerente'@'localhost';
